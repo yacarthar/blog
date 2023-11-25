@@ -1,0 +1,19 @@
+Flask==2.3.0
+Werkzeug==2.3.0
+python-dotenv==1.0.0
+flask-restx==1.2.0
+
+# db
+psycopg2==2.9.9
+SQLAlchemy==1.4.50
+Flask-SQLAlchemy==3.0.0
+
+alembic==1.12.1
+
+# OAuth
+Flask-OAuthlib==0.9.6
+
+# lint
+ruff==0.1.6
+isort==5.12.0
+autoflake==2.2.1

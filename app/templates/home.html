@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="col-md-8 mx-auto">
+  <!-- welcome -->
+  <div class="row mb-4 border-bottom text-center">
+    <i class="fas fa-laptop-house fa-3x"></i>
+    <h2 class="mt-1">Welcome!</h2>
+    <p class="lead">This is my personal blog</p>
+  </div>
+
+  <!-- intro -->
+  <div class="row mb-4 border-bottom" id="intro">
+    <p>
+      I’m Hoang, a software developer living in Hanoi, Vietnam. I mostly work in
+      <a href="https://www.python.org/" class="link">Python</a>
+      , with the
+      <a href="https://flask.palletsprojects.com/" class="link">Flask</a>
+      framework.
+      I have 2 years working as a backend developer.
+    </p>
+    <p>
+      This blog is where I share my expriences in daily task as well as my exploration of technologies.
+      You can find more <a href="/about" class="link">about me</a>, or <a href="/contact" class="link">get in
+        touch</a> if you'd like.
+    </p>
+  </div>
+
+  <!-- latest posts -->
+  <div class="row mb-4">
+    <h2 class="mt-1">Latest blog posts</h2>
+    <ul>
+      {% for post in posts %}
+      <li>
+        <a href="#">{{ post.title}}</a>
+        <span class="text-secondary">- {{ post.date_created }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>
+{% endblock %}

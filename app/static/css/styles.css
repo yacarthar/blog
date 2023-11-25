@@ -1,0 +1,71 @@
+/* styles.css */
+
+/* PTSans */
+@font-face {
+  font-family: 'PTSans';
+  src: url('/static/fonts/PTSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PTSans';
+  src: url('/static/fonts/PTSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PTSans';
+  src: url('/static/fonts/PTSans-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PTSans';
+  src: url('/static/fonts/PTSans-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* PTSerif */
+@font-face {
+  font-family: 'PTSerif';
+  src: url('/static/fonts/PTSerif-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PTSerif';
+  src: url('/static/fonts/PTSerif-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PTSerif';
+  src: url('/static/fonts/PTSerif-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PTSerif';
+  src: url('/static/fonts/PTSerif-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+body {
+  /* font-family: 'PTSans', sans-serif; */
+
+  font-family: 'PTSerif', serif;
+}
+
+/* .navbar {
+  background-color: RGBA(0,102,204,var(--bs-bg-opacity,1)) !important
+} */
+
+
