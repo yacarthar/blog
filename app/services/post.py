@@ -1,17 +1,18 @@
+from typing import Union
 from app.models import PostModel
 
 
-def list_post():
+def list_post() -> Union[list[PostModel], None]:
     posts = PostModel.query.order_by(PostModel.date_created.desc()).all()
-    return [p.to_json() for p in posts]
+    return posts
 
 
-def create_post(data):
+def create_post(data) -> Union[PostModel, None]:
     new_post = PostModel(**data)
     new_post.save()
-    return new_post.to_json()
+    return new_post
 
 
-def get_post(post_id):
+def get_post(post_id) -> Union[PostModel, None]:
     post = PostModel.find_by_id(post_id)
-    return post.to_json()
+    return post

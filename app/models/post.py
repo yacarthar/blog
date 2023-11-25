@@ -33,10 +33,14 @@ class PostModel(db.Model):
     def find_by_id(cls, _id: int):
         return cls.query.get(_id)
 
+    @property
+    def link(self):
+        return generate_link(self.title.lower(), self.id)
+
     def to_json(self):
         return {
             "id": self.id,
-            "link": generate_link(self.title, self.id),
+            "link": self.link,
             "title": self.title,
             "content": self.content,
             "author": self.author,

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+<div class="col-md-8 mx-auto">
+  <!-- welcome -->
+  <div class="row mb-4 border-bottom">
+    <i class="fa-regular fa-pen-to-square fa-3x text-center mb-2"></i>
+    <h1 class="my-3">{{post.title|title}}</h1>
+    <small class="mb-2">
+      Published: {{post.date_created}}.
+      Tags: Lorem, ipsum.
+    </small>
+  </div>
+
+  <!-- intro -->
+  <div class="row mb-4 border-bottom" id="intro">
+    <p class="fst-italic">
+      SUMMARY: Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias qui sunt suscipit velit culpa non eum
+      nihil
+      porro voluptatibus delectus?
+    </p>
+  </div>
+
+  <div class="row mb-4">
+    {{ post.content|safe }}
+  </div>
+
+</div>
+{% endblock %}

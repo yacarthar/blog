@@ -64,8 +64,8 @@ body {
   font-family: 'PTSerif', serif;
 }
 
-/* .navbar {
-  background-color: RGBA(0,102,204,var(--bs-bg-opacity,1)) !important
-} */
-
+#latest_posts li {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 

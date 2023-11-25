@@ -88,18 +88,7 @@
   margin-top: 8rem;
   margin-bottom: 5rem;
 }
-#content {
-  font-family: "PT Serif", Georgia, "Georgia Ref", "Times New Roman", serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  margin-top: 8rem;
-  margin-bottom: 5rem;
-}
-#content form input.form-control,
-#content form textarea.form-control {
-  font-family: "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
+
 #content .h1,
 #content .h2,
 #content .h3,
@@ -111,18 +100,13 @@
 #content h3,
 #content h4,
 #content h5,
-#content h6,
-#content th {
+#content h6 {
   font-family: "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 600;
 }
-#content .alert {
-  font-family: "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
+
 #content .h2,
 #content .h3,
 #content .h4,
@@ -133,13 +117,14 @@
 #content h4,
 #content h5,
 #content h6 {
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 #content blockquote,
 #content li,
 #content p,
 #content ul {
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
+  list-style-position: inside;
 }
 #content p.meta {
   border-bottom: 1px solid #dee2e6;
@@ -167,35 +152,17 @@
   padding: 1rem;
   font-style: italic;
 }
-#content .content-list {
-  list-style-type: none;
-}
-#content .list-meta {
-  font-style: italic;
-  font-size: 0.95rem;
-  border-bottom: 1px solid #dee2e6;
-}
-#content .content-title {
-  font-family: "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
+
+
+
 #content .content-date {
   font-size: 0.95rem;
 }
 #content ins {
   text-decoration: none;
 }
-#content li {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-#content form button,
-#content form label {
-  font-family: "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
+
+
 
 /* bg- */
 .bg-primary {
