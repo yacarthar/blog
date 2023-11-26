@@ -2,7 +2,7 @@ from typing import Union
 from app.models import Post
 
 
-def list_post() -> Union[list[Post], None]:
+def list_post() -> Union[list, None]:
     posts = Post.query.order_by(Post.date_created.desc()).all()
     return posts
 

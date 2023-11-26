@@ -4,7 +4,7 @@ python-dotenv==1.0.0
 flask-restx==1.2.0
 
 # db
-psycopg2==2.9.9
+psycopg2-binary
 SQLAlchemy==1.4.50
 Flask-SQLAlchemy==3.0.0
 
