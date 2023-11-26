@@ -11,28 +11,21 @@
     <p class="lead">Posts archive by date</p>
   </div>
 
-  <!-- intro -->
-  <div class="row mb-4 border-bottom" id="intro">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias qui sunt suscipit velit culpa non eum nihil
-      porro voluptatibus delectus?
-    </p>
-    <p>
-      Brows by category (/category)
-    </p>
-  </div>
-
   <!-- latest posts -->
   <div class="row mb-4">
     <ul>
       {% for post in posts %}
       <li class="list-unstyled">
         <a href="{{post.link}}">
-          <h4>{{ post.title}}</h4>
+          <h4>{{ post.title | title}}</h4>
         </a>
         <small class="text-secondary">{{ post.date_created }}</small>
-        <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laborum suscipit libero,
-          iusto ipsum excepturi.</p>
+        <small>
+          {% for tag in post.tags%}
+          <a href="{{'/posts/tags/' + tag }}">{{tag}}</a>
+          {% endfor%}
+        </small>
+        <p class="fst-italic">{{ post.summary}}</p>
       </li>
       {% endfor %}
     </ul>
