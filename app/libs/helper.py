@@ -1,4 +1,7 @@
 import re
+from os.path import splitext
+
+ALLOWED_EXTENSIONS = [".html"]
 
 
 def clean_title(title):
@@ -13,3 +16,8 @@ def generate_link(title, post_id):
     words.append(post_id)
     link = "/posts/" + "-".join(words)
     return link
+
+
+def allowed_file(filename):
+    name, extension = splitext(filename)
+    return extension in ALLOWED_EXTENSIONS

@@ -1,4 +1,5 @@
 from typing import Union
+
 from app.models import Post
 
 
@@ -7,8 +8,8 @@ def list_post() -> Union[list, None]:
     return posts
 
 
-def create_post(data) -> Union[Post, None]:
-    new_post = Post(**data)
+def create_post(**kwargs) -> Union[Post, None]:
+    new_post = Post(**kwargs)
     new_post.save()
     return new_post
 

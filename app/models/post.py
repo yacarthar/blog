@@ -55,12 +55,12 @@ class Post(db.Model):
     def link(self):
         return generate_link(self.title.lower(), self.id)
 
-    def to_json(self):
+    def to_json(self, short=None):
         return {
             "id": self.id,
             "link": self.link,
             "title": self.title,
-            "content": self.content,
+            "content": self.content[:short],
             "author": self.author,
             "date_created": self.date_created.strftime("%Y-%m-%d %H:%M:%S"),
             "summary": self.summary,
@@ -74,6 +74,9 @@ class Post(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    def refresh(self):
+        db.session.refresh(self)
 
 
 class Tag(db.Model):
@@ -95,3 +98,6 @@ class Tag(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    def refresh(self):
+        db.session.refresh(self)
