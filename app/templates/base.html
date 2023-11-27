@@ -10,9 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}" />
-  <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/custom_bs.css')}}" /> -->
-  <link rel="stylesheet" href="{{url_for('static', filename='css/cool.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/stack_edit.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/cool.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}" />
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -26,17 +26,17 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item" id="contact-link">
+          <div class="navbar-nav ms-auto">
+            <div class="nav-item" id="contact-link">
               <a class="nav-link" href="/contact/">Contact</a>
-            </li>
-            <li class="nav-item" id="projects-link">
+            </div>
+            <div class="nav-item" id="projects-link">
               <a class="nav-link" href="/projects/">Projects</a>
-            </li>
-            <li class="nav-item" id="weblog-link">
+            </div>
+            <div class="nav-item" id="weblog-link">
               <a class="nav-link active" href="/posts/">Weblog</a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </nav>
     </div>

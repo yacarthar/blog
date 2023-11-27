@@ -2,6 +2,7 @@ from datetime import datetime
 from uuid import uuid4
 
 from app.libs.helper import generate_link
+
 from .base import db
 
 association_table = db.Table(
@@ -27,7 +28,12 @@ class Post(db.Model):
     )
 
     def __init__(
-        self, title: str, content: str, author=None, date_created=None
+        self,
+        title: str,
+        content: str,
+        author=None,
+        summary=None,
+        date_created=None,
     ):
         self.id = uuid4().hex[:8]
         self.title = title.strip()
@@ -35,6 +41,7 @@ class Post(db.Model):
         self.author = author
         if date_created:
             self.date_created = datetime.fromisoformat(date_created)
+        self.summary = summary
 
     @classmethod
     def fetch_all(cls):
