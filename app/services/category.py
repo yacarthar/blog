@@ -20,7 +20,7 @@ def create_category(name) -> Category:
         return new_cat
 
 
-def get_cats_has_most_post() -> list:
+def get_top_categories() -> list:
     top_categories = (
         db.session.query(
             Category.id.label("category_id"),
