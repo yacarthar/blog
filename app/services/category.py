@@ -1,6 +1,8 @@
 from typing import Union
 
-from app.models import Category
+from sqlalchemy import func
+
+from app.models import Category, Post, db
 
 
 def get_category_by_name(cat_name) -> Union[Category, None]:
@@ -16,3 +18,19 @@ def create_category(name) -> Category:
         new_cat.save()
         new_cat.refresh()
         return new_cat
+
+
+def get_cats_has_most_post() -> list:
+    top_categories = (
+        db.session.query(
+            Category.id.label("category_id"),
+            Category.name.label("category_name"),
+            func.count(Post.id).label("post_count"),
+        )
+        .join(Post, Category.id == Post.category_id)
+        .group_by(Category.id, Category.name)
+        .order_by(func.count(Post.id).desc())
+        .limit(5)
+        .all()
+    )
+    return top_categories

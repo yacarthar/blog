@@ -78,3 +78,11 @@ body {
 #content-post li {
   list-style-position: outside;
 }
+
+#category-tag {
+  top: 5rem;
+}
+
+#center-pane > ul {
+  padding-left: 0.25rem;
+}

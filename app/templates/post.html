@@ -1,32 +1,28 @@
-{% extends "base.html" %}
-
-{% block title %}{{post.title|title}}{% endblock %}
-
-{% block content %}
-<div class="col-md-8 mx-auto">
-  <!-- welcome -->
-  <div class="row mb-4 border-bottom">
-    <i class="fa-regular fa-pen-to-square fa-3x text-center mb-2"></i>
-    <h1 class="my-3">{{post.title|title}}</h1>
-    <small class="mb-2">
-      Published: {{post.date_created}}.
-      Tags:
-      {% for tag in post.tags%}
-      <a href="{{'/posts/tags/' + tag }}">{{tag}}</a>
-      {% endfor%}
-    </small>
+{% extends "base.html" %} {% block title %}{{post.title|title}}{% endblock %} {%
+block content %}
+<!-- welcome -->
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="border-bottom">
+      <h1 class="my-3">{{post.title|title}}</h1>
+      <small class="mb-2">
+        Published: {{post.date_created}}. Tags: {% for tag in post.tags%}
+        <a href="{{'/posts/tags/' + tag }}">{{tag}}</a>
+        {% endfor%}
+      </small>
+      <p class="fst-italic">SUMMARY: {{post.summary}}</p>
+    </div>
   </div>
-
-  <!-- intro -->
-  <div class="row mb-4 border-bottom" id="intro">
-    <p class="fst-italic">
-      SUMMARY: {{post.summary}}
-    </p>
-  </div>
-
-  <div id="content-post" class="row mb-4">
-    {{ post.content|safe }}
-  </div>
-
 </div>
+
+<div class="row mb-4">
+  <div class="col-md-3" id="left-pane"></div>
+  <div class="col-md-6" id="center-pane">
+    <div id="content-post">{{ post.content|safe }}</div>
+  </div>
+  <div class="col-md-3" id="right-pane">
+    {% include 'components/cat-n-tag.html' %}
+  </div>
+</div>
+
 {% endblock %}
