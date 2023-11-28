@@ -3,14 +3,8 @@ from uuid import uuid4
 
 from app.libs.helper import generate_link
 
+from .associations import post_x_tag
 from .base import db
-
-association_table = db.Table(
-    "associations",
-    db.metadata,
-    db.Column("post_id", db.ForeignKey("posts.id"), primary_key=True),
-    db.Column("tag_id", db.ForeignKey("tags.id"), primary_key=True),
-)
 
 
 class Post(db.Model):
@@ -23,9 +17,13 @@ class Post(db.Model):
     date_created = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow
     )
-    tags = db.relationship(
-        "Tag", secondary=association_table, back_populates="posts"
+    category_id = db.Column(
+        db.Integer,
+        db.ForeignKey("categories.id", ondelete="SET NULL"),
+        nullable=True,
     )
+    category = db.relationship("Category", back_populates="posts")
+    tags = db.relationship("Tag", secondary=post_x_tag, back_populates="posts")
 
     def __init__(
         self,
@@ -65,31 +63,8 @@ class Post(db.Model):
             "date_created": self.date_created.strftime("%Y-%m-%d %H:%M:%S"),
             "summary": self.summary,
             "tags": [t.name for t in self.tags],
+            "category": self.category.name,
         }
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-
-    def refresh(self):
-        db.session.refresh(self)
-
-
-class Tag(db.Model):
-    __tablename__ = "tags"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), unique=True)
-    posts = db.relationship(
-        "Post", secondary=association_table, back_populates="tags"
-    )
-
-    @classmethod
-    def find_by_name(cls, name):
-        return cls.query.filter_by(name=name).first()
 
     def save(self):
         db.session.add(self)
