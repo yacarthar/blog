@@ -1,4 +1,4 @@
-<div class="sticky-top" id="category-tag">
+<div class="sticky-top" id="float-pane">
   <div class="border py-2 px-3">
     <div class="input-group py-2">
       <input
@@ -13,7 +13,9 @@
       <ul class="nav flex-column">
         {% for c in g.top_categories %}
         <li class="nav-item">
-          <a href="#" class="text-decoration-none text-primary"
+          <a
+            href="{{ '/posts/category/' + c.category_name}}"
+            class="text-decoration-none text-primary"
             >{{ c.category_name }}</a
           >
           <span>{{ c.post_count }}</span>
@@ -27,7 +29,7 @@
         {% for t in g.top_tags %}
         <li class="nav-item">
           <a
-            href="{{ '/posts/tags/' + t.tag_name}}"
+            href="{{ '/posts/tag/' + t.tag_name}}"
             class="text-decoration-none text-primary"
             >{{ t.tag_name }}</a
           >

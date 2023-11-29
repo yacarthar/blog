@@ -78,8 +78,18 @@ body {
 #content-post li {
   list-style-position: outside;
 }
-
-#category-tag {
+#content-post h1::before,
+#content-post h2::before,
+#content-post h3::before,
+#content-post h4::before,
+#content-post h5::before,
+#content-post h6::before {
+  content: " ";
+  margin-top: -4rem;
+  height: 4rem;
+  display: block;
+}
+#float-pane {
   top: 5rem;
 }
 

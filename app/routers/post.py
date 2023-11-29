@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 from flask import make_response, render_template, request
 from flask_restx import Namespace, Resource
 from pydantic import ValidationError
@@ -6,8 +5,9 @@ from werkzeug.utils import secure_filename
 
 from app.libs.helper import allowed_file
 from app.libs.log import logger
+from app.libs.markdown import convert_to_html, extract_tag_body, generate_toc
 from app.schemas.post import PostCreate
-from app.services.category import create_category
+from app.services.category import create_category, get_category_by_name
 from app.services.post import create_post, get_post, list_post
 from app.services.tag import create_tag, get_tag_by_name
 
@@ -23,12 +23,21 @@ class PostsHandler(Resource):
         return make_response(render_template("posts.html", posts=posts))
 
 
-@api.route("/tags/<tag_name>")
+@api.route("/tag/<tag_name>")
 class TagsHandler(Resource):
     @classmethod
     def get(cls, tag_name):
         tag = get_tag_by_name(tag_name)
         posts = [p.to_json() for p in tag.posts]
+        return make_response(render_template("posts.html", posts=posts))
+
+
+@api.route("/category/<cat_name>")
+class CatsHandler(Resource):
+    @classmethod
+    def get(cls, cat_name):
+        cat = get_category_by_name(cat_name)
+        posts = [p.to_json() for p in cat.posts]
         return make_response(render_template("posts.html", posts=posts))
 
 
@@ -105,9 +114,15 @@ class PostsApi(Resource):
             logger.error(e.json())
             return {"message": "Bad Request"}, 400
 
-        soup = BeautifulSoup(file.read(), "html.parser")
-        body_content = soup.body
-        new_post = create_post(content=str(body_content), **data.model_dump())
+        markdown_content = file.read().decode("utf-8")
+        html_content = convert_to_html(markdown_content)
+
+        post_content = extract_tag_body(html_content)
+        toc = generate_toc(html_content)
+
+        new_post = create_post(
+            content=post_content, toc=toc, **data.model_dump()
+        )
 
         tags = request.form.getlist("tag")
         if tags:
@@ -116,5 +131,12 @@ class PostsApi(Resource):
                 new_post.tags.append(tag)
         new_post.save()
         new_post.refresh()
+
+        cat_name = request.form.get("category")
+        if cat_name:
+            category = create_category(cat_name)
+            new_post.category_id = category.id
+            new_post.save()
+            new_post.refresh()
 
         return new_post.to_json(short=100), 200

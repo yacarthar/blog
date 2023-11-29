@@ -1,7 +1,7 @@
 import re
 from os.path import splitext
 
-ALLOWED_EXTENSIONS = [".html"]
+ALLOWED_EXTENSIONS = [".md", ".html"]
 
 
 def clean_title(title):

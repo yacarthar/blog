@@ -14,6 +14,7 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     summary = db.Column(db.String(140), nullable=True)
     author = db.Column(db.String(40), nullable=True)
+    toc = db.Column(db.Text, nullable=True)
     date_created = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow
     )
@@ -31,6 +32,7 @@ class Post(db.Model):
         content: str,
         author=None,
         summary=None,
+        toc=None,
         date_created=None,
     ):
         self.id = uuid4().hex[:8]
@@ -40,6 +42,7 @@ class Post(db.Model):
         if date_created:
             self.date_created = datetime.fromisoformat(date_created)
         self.summary = summary
+        self.toc = toc
 
     @classmethod
     def fetch_all(cls):
@@ -62,6 +65,7 @@ class Post(db.Model):
             "author": self.author,
             "date_created": self.date_created.strftime("%Y-%m-%d %H:%M:%S"),
             "summary": self.summary,
+            "toc": self.toc[:short] if self.toc is not None else None,
             "tags": [t.name for t in self.tags],
             "category": self.category.name,
         }

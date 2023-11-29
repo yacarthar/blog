@@ -30,7 +30,7 @@ def get_top_tags() -> list:
         .join(post_x_tag, Tag.id == post_x_tag.c.tag_id)
         .group_by(Tag.id, Tag.name)
         .order_by(func.count(post_x_tag.c.post_id).desc())
-        .limit(5)
+        .limit(15)
         .all()
     )
     return top_tags

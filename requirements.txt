@@ -24,3 +24,4 @@ gunicorn==21.2.0
 # for insert post content
 beautifulsoup4==4.12.2
 pydantic==2.5.2
+Markdown==3.5.1

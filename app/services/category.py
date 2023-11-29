@@ -30,7 +30,7 @@ def get_top_categories() -> list:
         .join(Post, Category.id == Post.category_id)
         .group_by(Category.id, Category.name)
         .order_by(func.count(Post.id).desc())
-        .limit(5)
+        .limit(10)
         .all()
     )
     return top_categories

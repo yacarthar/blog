@@ -42,6 +42,6 @@ def register_api(app):
 def register_request_decorator(app):
     @app.before_request
     def load_top_categories():
-        if "handler" in request.endpoint:
+        if request.endpoint is not None and "handler" in request.endpoint:
             g.top_categories = get_top_categories()
             g.top_tags = get_top_tags()
