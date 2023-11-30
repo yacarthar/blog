@@ -38,4 +38,5 @@ def generate_ul_tag(headings: ResultSet, current_level):
 def generate_toc(html_content):
     soup = BeautifulSoup(html_content, "html.parser")
     headings = soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6"])
-    return generate_ul_tag(headings, 1)
+    start_level = heading_level(headings[0])
+    return generate_ul_tag(headings, start_level)

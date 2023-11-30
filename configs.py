@@ -1,4 +1,5 @@
 import os
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -26,6 +27,7 @@ class Test(Config):
 
 class Prod(Config):
     DEBUG = False
+    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI_PROD")
 
 
 configs = dict(
