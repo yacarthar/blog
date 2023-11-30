@@ -90,7 +90,7 @@ class PostApi(Resource):
             logger.error(e.json())
             return {"message": "Bad Request"}, 400
 
-        tags = request.form.get("tags")
+        tags = request.form.getlist("tag")
         if tags:
             for name in tags:
                 tag = create_tag(name)

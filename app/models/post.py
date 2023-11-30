@@ -67,7 +67,7 @@ class Post(db.Model):
             "summary": self.summary,
             "toc": self.toc[:short] if self.toc is not None else None,
             "tags": [t.name for t in self.tags],
-            "category": self.category.name,
+            "category": self.category.name if self.category_id else None,
         }
 
     def save(self):
