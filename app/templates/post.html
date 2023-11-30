@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}{{post.title|title}}{% endblock %} {%
 block content %}
 <!-- welcome -->
-<div class="row">
+<div class="row" id="intro">
   <div class="col-md-6 mx-auto">
     <div class="border-bottom">
       <h1 class="my-3">{{post.title|title}}</h1>
@@ -15,7 +15,7 @@ block content %}
   </div>
 </div>
 
-<div class="row mb-4">
+<div class="row mb-4"  id="main">
   <div class="col-md-3" id="left-pane">
     {% if post.toc%}
     <div class="sticky-top" id="float-pane">

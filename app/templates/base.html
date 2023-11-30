@@ -19,17 +19,16 @@
     />
     <link
       rel="stylesheet"
-      href="{{url_for('static', filename='css/stack_edit.css')}}"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai-sublime.css"
     />
-
-    <link
-      rel="stylesheet"
-      href="{{url_for('static', filename='css/cool.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{url_for('static', filename='css/styles.css')}}"
-    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.configure({
+        classPrefix: "hljs-",
+      });
+    </script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/cool.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}"/>
   </head>
 
   <body class="d-flex flex-column min-vh-100">
@@ -102,5 +101,27 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"
+      integrity="sha512-wW8K3TEH5ZViD4aMPzwPdhXKs/Kb5MAm7qLRd3QliYlHy0u9utSKZsZzqlZAgJ9xxXp81acwnrZVZ8oTfoLG1g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"
+      integrity="sha512-i0JFeiLhgBAMGfIEVqMQwALhhse1orgl34XyotSUNiNbDIB1qS9IK53sDochCIrwvj4nJ51CsDSOqhGyhZITGg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"
+      integrity="sha512-ua2qDFSOqEpuYTjyTTmn8L1hY4sQEZGPzu30sBKqUmZO7ky5IcfYYeYjAHKeEkO2Qf3zlUzVEli9mPPLEfovlA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      hljs.highlightAll();
+    </script>
   </body>
 </html>
