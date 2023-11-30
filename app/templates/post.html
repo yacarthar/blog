@@ -9,8 +9,13 @@ block content %}
         Published: {{post.date_created}} {% if post.category is not none%}
         <span
           >on
-          <span class="badge text-bg-secondary">{{post.category}}</span></span
-        >
+          <a
+            href="{{'/posts/category/' + post.category }}"
+            class="text-primary fst-italic text-decoration-none"
+          >
+            <i class="fa-regular fa-folder-open pe-1"></i>{{post.category}}
+          </a>
+        </span>
         {% endif%}</small
       >
       <div>
