@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from app.libs.helper import allowed_file
 from app.libs.log import logger
 from app.libs.markdown import convert_to_html, extract_tag_body, generate_toc
-from app.schemas.post import PostCreate
+from app.schemas.post import PostCreate, PostUpdate
 from app.services.category import create_category, get_category_by_name
 from app.services.post import create_post, get_post, list_post
 from app.services.tag import create_tag, get_tag_by_name
@@ -69,9 +69,28 @@ class PostApi(Resource):
         if not post:
             return {"message": "not found"}, 404
 
-        # tags = request.form.getlist("tag")
-        # tbd: update more field
-        tags = request.json.get("tags")
+        file = request.files.get("file")
+        if (
+            file
+            and file.filename != ""
+            and allowed_file(secure_filename(file.filename))
+        ):
+            markdown_content = file.read().decode("utf-8")
+            html_content = convert_to_html(markdown_content)
+            post.content = extract_tag_body(html_content)
+            post.toc = generate_toc(html_content)
+
+        try:
+            raw_data = request.form.to_dict()
+            data = PostUpdate.model_validate(raw_data)
+            data_dict = data.model_dump(exclude_none=True)
+            for k, v in data_dict.items():
+                setattr(post, k, v)
+        except ValidationError as e:
+            logger.error(e.json())
+            return {"message": "Bad Request"}, 400
+
+        tags = request.form.get("tags")
         if tags:
             for name in tags:
                 tag = create_tag(name)
@@ -79,7 +98,7 @@ class PostApi(Resource):
         post.save()
         post.refresh()
 
-        cat_name = request.json.get("category")
+        cat_name = request.form.get("category")
         if cat_name:
             category = create_category(cat_name)
             post.category_id = category.id
