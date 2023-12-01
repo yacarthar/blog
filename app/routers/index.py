@@ -10,5 +10,6 @@ api = Namespace("index")
 class Home(Resource):
     @classmethod
     def get(cls):
-        posts = list_post()
+        page = list_post()
+        posts = [p.to_json() for p in page.items]
         return make_response(render_template("home.html", posts=posts))

@@ -7,9 +7,15 @@ from app.libs.helper import allowed_file
 from app.libs.log import logger
 from app.libs.markdown import convert_to_html, extract_tag_body, generate_toc
 from app.schemas.post import PostCreate, PostUpdate
-from app.services.category import create_category, get_category_by_name
-from app.services.post import create_post, get_post, list_post
-from app.services.tag import create_tag, get_tag_by_name
+from app.services.category import create_category
+from app.services.post import (
+    create_post,
+    find_post_by_category,
+    find_post_by_tag,
+    get_post,
+    list_post,
+)
+from app.services.tag import create_tag
 
 api = Namespace("post")
 
@@ -18,27 +24,36 @@ api = Namespace("post")
 class PostsHandler(Resource):
     @classmethod
     def get(cls):
-        raw_posts = list_post()
-        posts = [p.to_json() for p in raw_posts]
-        return make_response(render_template("posts.html", posts=posts))
+        page_num = int(request.args.get("page", 1))
+        page = list_post(page=page_num)
+        posts = [p.to_json() for p in page.items]
+        return make_response(
+            render_template("posts.html", posts=posts, pagination=page)
+        )
 
 
 @api.route("/tag/<tag_name>")
 class TagsHandler(Resource):
     @classmethod
     def get(cls, tag_name):
-        tag = get_tag_by_name(tag_name)
-        posts = [p.to_json() for p in tag.posts]
-        return make_response(render_template("posts.html", posts=posts))
+        page_num = int(request.args.get("page", 1))
+        page = find_post_by_tag(tag_name, page_num)
+        posts = [p.to_json() for p in page.items]
+        return make_response(
+            render_template("posts.html", posts=posts, pagination=page)
+        )
 
 
 @api.route("/category/<cat_name>")
 class CatsHandler(Resource):
     @classmethod
     def get(cls, cat_name):
-        cat = get_category_by_name(cat_name)
-        posts = [p.to_json() for p in cat.posts]
-        return make_response(render_template("posts.html", posts=posts))
+        page_num = int(request.args.get("page", 1))
+        page = find_post_by_category(cat_name, page_num)
+        posts = [p.to_json() for p in page.items]
+        return make_response(
+            render_template("posts.html", posts=posts, pagination=page)
+        )
 
 
 @api.route("/<path>")
@@ -112,8 +127,8 @@ class PostApi(Resource):
 class PostsApi(Resource):
     @classmethod
     def get(cls):
-        raw_posts = list_post()
-        posts = [p.to_json(short=50) for p in raw_posts]
+        raw_page = list_post()
+        posts = [p.to_json(short=50) for p in raw_page.items]
         return posts
 
     @classmethod

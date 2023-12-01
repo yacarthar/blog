@@ -1,0 +1,22 @@
+<nav id="pagination-widget">
+  <ul class="pagination justify-content-center">
+    {% for page in pagination.iter_pages()%}
+    {% if page %}
+    {% if page != pagination.page %}
+    <li class="page-item">
+      <a class="page-link" href="{{request.base_url + '?page=%s'%page }}"
+        >{{ page }}</a
+      >
+    </li>
+    {% else %}
+    <li
+      class="page-item"
+      style="pointer-events: none; cursor: default; text-decoration: none"
+    >
+      <a class="page-link link-secondary" href="#">{{ page }}</a>
+    </li>
+    {% endif %} {% else %}
+    <span class="ellipsis">…</span>
+    {% endif %} {% endfor %}
+  </ul>
+</nav>

@@ -34,7 +34,7 @@ block content %}
   <div class="col-md-3" id="left-pane">
     {% if post.toc is not none %}
     <div class="sticky-top" id="float-pane">
-      <div class="border py-2 px-3">
+      <div class="border">
         <div>{{ post.toc|safe }}</div>
       </div>
     </div>
@@ -44,7 +44,7 @@ block content %}
     <div id="content-post">{{ post.content|safe }}</div>
   </div>
   <div class="col-md-3" id="right-pane">
-    {% include 'components/cat-n-tag.html' %}
+    {% include "components/cat-n-tag.html" %}
   </div>
 </div>
 
