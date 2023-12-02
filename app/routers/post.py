@@ -1,4 +1,4 @@
-from flask import make_response, render_template, request
+from flask import make_response, redirect, render_template, request, url_for
 from flask_restx import Namespace, Resource
 from pydantic import ValidationError
 from werkzeug.utils import secure_filename
@@ -24,8 +24,9 @@ api = Namespace("post")
 class PostsHandler(Resource):
     @classmethod
     def get(cls):
+        keyword = request.args.get("keyword")
         page_num = int(request.args.get("page", 1))
-        page = list_post(page=page_num)
+        page = list_post(keyword=keyword, page=page_num)
         posts = [p.to_json() for p in page.items]
         return make_response(
             render_template("posts.html", posts=posts, pagination=page)
@@ -66,6 +67,17 @@ class PostHandler(Resource):
             return {"message": "not found"}, 404
         post = raw_post.to_json()
         return make_response(render_template("post.html", post=post))
+
+
+@api.route("/api/search")
+class SearchApi(Resource):
+    @classmethod
+    def post(cls):
+        keyword = request.form.get("searchInput")
+        if keyword:
+            return redirect(url_for("post_posts_handler", keyword=keyword))
+        else:
+            return redirect(url_for("post_posts_handler"))
 
 
 @api.route("/api/<post_id>")

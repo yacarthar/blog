@@ -1,6 +1,7 @@
 from flask import Flask, g, redirect, request
 from flask_restx import Api
 
+from app.libs.helper import build_url
 from app.models import db
 from app.routers.index import api as index_ns
 from app.routers.post import api as post_ns
@@ -45,3 +46,4 @@ def register_request_decorator(app):
         if request.endpoint is not None and "handler" in request.endpoint:
             g.top_categories = get_top_categories()
             g.top_tags = get_top_tags()
+            g.build_url = build_url

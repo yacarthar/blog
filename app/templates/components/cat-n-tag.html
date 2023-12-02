@@ -1,13 +1,16 @@
 <div class="sticky-top" id="float-pane">
   <div class="border py-2 px-3">
-    <div class="input-group py-2">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="How can we help you?"
-      />
-      <button class="btn btn-primary">Search</button>
-    </div>
+    <form method="post" action="{{ url_for('post_search_api') }}">
+      <div class="input-group py-2">
+        <input
+          type="text"
+          name="searchInput"
+          class="form-control"
+          placeholder="Search by title"
+        />
+        <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+    </form>
     <div class="pb-2">
       <h5 class="h6 my-2">Categories</h5>
       <ul class="nav flex-column">

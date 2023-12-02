@@ -2,15 +2,18 @@ from typing import Union
 
 from flask_sqlalchemy.pagination import SelectPagination
 
-from app.models import Post, Tag
+from app.models import Post, Tag, db
 from app.services.category import get_category_by_name
 from app.services.tag import get_tag_by_name
 
 
-def list_post(page=1) -> SelectPagination:
-    page_posts = Post.query.order_by(Post.date_created.desc()).paginate(
-        page=page, per_page=5
-    )
+def list_post(keyword: Union[str, None] = None, page=1) -> SelectPagination:
+    query = Post.query.order_by(Post.date_created.desc())
+    if keyword:
+        query = Post.query.filter(Post.title.ilike(f"%{keyword}%")).order_by(
+            Post.date_created.desc()
+        )
+    page_posts = db.paginate(query, page=page, per_page=5)
     return page_posts
 
 
