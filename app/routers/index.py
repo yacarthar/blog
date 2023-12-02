@@ -13,3 +13,10 @@ class Home(Resource):
         page = list_post()
         posts = [p.to_json() for p in page.items]
         return make_response(render_template("home.html", posts=posts))
+
+
+@api.route("projects/")
+class Projects(Resource):
+    @classmethod
+    def get(cls):
+        return make_response(render_template("projects.html"))
